@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://j184qrs872el"]
+
+[ext_resource type="Texture2D" uid="uid://dpjpjfns5uukf" path="res://Assets/background-purple.png" id="1_ery1i"]
+[ext_resource type="PackedScene" uid="uid://b07g7t471rja8" path="res://entities/player/player.tscn" id="2_uwrf0"]
+[ext_resource type="Script" path="res://Boundary.gd" id="3_q0y5k"]
+[ext_resource type="Texture2D" uid="uid://bvpr5u3g4rjbb" path="res://Assets/spacepixels-0.2.0/horizontal_bar_blue.png" id="3_uhom4"]
+[ext_resource type="PackedScene" uid="uid://bqkd5fbfw1olt" path="res://entities/enemy_spawner/enemy_spawner.tscn" id="4_fvrcq"]
+[ext_resource type="Script" path="res://entities/enemy_spawner/enemy_spawner.gd" id="5_4clqj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nb1tp"]
+size = Vector2(400, 12)
+
+[node name="Game Manager" type="Node2D"]
+
+[node name="Background-purple" type="Sprite2D" parent="."]
+position = Vector2(200, 298)
+scale = Vector2(1, 1.51)
+texture = ExtResource("1_ery1i")
+
+[node name="player" parent="." instance=ExtResource("2_uwrf0")]
+position = Vector2(200, 568)
+
+[node name="Boundary" type="Area2D" parent="."]
+position = Vector2(200, 504)
+script = ExtResource("3_q0y5k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundary"]
+shape = SubResource("RectangleShape2D_nb1tp")
+
+[node name="HorizontalBarBlue" type="Sprite2D" parent="Boundary"]
+scale = Vector2(3.07692, 1.05)
+texture = ExtResource("3_uhom4")
+
+[node name="Bullets" type="Node" parent="."]
+
+[node name="Enemies" type="Node" parent="." groups=["enemy"]]
+
+[node name="EnemySpawner" parent="." groups=["enemy"] instance=ExtResource("4_fvrcq")]
+position = Vector2(200, 504)
+script = ExtResource("5_4clqj")
+
+[node name="game_over" type="RichTextLabel" parent="."]
+visible = false
+offset_left = 112.0
+offset_top = 288.0
+offset_right = 208.0
+offset_bottom = 312.0
+scale = Vector2(2, 2)
+text = "GAME OVER"
+
+[connection signal="area_entered" from="Boundary" to="EnemySpawner" method="_on_boundary_area_entered"]
+[connection signal="child_entered_tree" from="EnemySpawner" to="player" method="_on_enemy_spawner_child_entered_tree"]
+[connection signal="child_entered_tree" from="EnemySpawner" to="Boundary" method="_on_enemy_spawner_child_entered_tree"]

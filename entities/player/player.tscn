@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://b07g7t471rja8"]
+
+[ext_resource type="Script" path="res://entities/player/player.gd" id="1_ag400"]
+[ext_resource type="Texture2D" uid="uid://dwbu24tjyrk8w" path="res://Assets/space_pixels_ships_stroked/ship_green_stroked.png" id="1_lqd7n"]
+
+[node name="player" type="Node2D"]
+script = ExtResource("1_ag400")
+
+[node name="ShipSprite" type="Sprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_lqd7n")
