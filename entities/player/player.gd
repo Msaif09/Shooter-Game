@@ -9,6 +9,7 @@ var player_half_width:int = 16
 
 var shoot_time:= 0.8
 var shoot_counter = 0
+var score = 0;
 
 
 # Called when the node enters the scene tree for the first time.
@@ -25,7 +26,8 @@ func _process(delta):
 		bullet_instance.position.x = position.x
 		bullet_instance.position.y = position.y-20
 		get_parent().get_node("Bullets").add_child(bullet_instance)
-		
+			
+			
 		
 	
 #	if Input.is_action_pressed("restart_game"):

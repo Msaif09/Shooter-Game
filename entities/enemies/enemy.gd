@@ -2,7 +2,7 @@ class_name Enemy
 extends Area2D
 
 
-var speed:int = 120
+var speed:int = 100
 var enemy_half_width:int = 16
 
 
@@ -23,3 +23,4 @@ func _on_area_entered(area:Area2D):
 	if area.name == "BulletArea":
 		area.get_parent().queue_free()
 		queue_free()
+		get_parent().get_parent().get_node("Score").text = str(int(get_parent().get_parent().get_node("Score").text)+1)

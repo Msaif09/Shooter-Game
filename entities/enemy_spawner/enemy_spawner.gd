@@ -2,6 +2,7 @@ extends Node2D
 
 
 var enemy_scene = preload("res://entities/enemies/enemy.tscn")
+var score = 0;
 
 
 # Called when the node enters the scene tree for the first time.
@@ -33,3 +34,6 @@ func _the_end(body:Node):
 
 func _on_boundary_area_entered(body):
 	_the_end(body)
+
+
+
